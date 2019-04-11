@@ -1,0 +1,9 @@
+server:
+  port: 8089
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://39.97.187.198:8081/gaea/eureka
+spring:
+  application:
+    name: gaea-sso
