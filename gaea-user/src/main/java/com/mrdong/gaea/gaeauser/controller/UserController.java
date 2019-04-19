@@ -17,4 +17,9 @@ public class UserController {
     public String login(@RequestParam("name") String name){
         return userService.login(name);
     }
+
+    @GetMapping("/logout")
+    public String logout(@RequestParam("userId")Integer userId){
+        return null;
+    }
 }
