@@ -21,13 +21,12 @@ public class UserController {
     private IUserService userService;
 
     @GetMapping("/login")
-    public Result login(@RequestParam("name") String name){
+    public Result login(@RequestParam("phone") String phone){
 
         Trace trace = Trace.getInstance();
-        trace.setValue(111);
 
 
-        return userService.login(name);
+        return userService.login(phone);
     }
 
     @GetMapping("/logout")
@@ -39,4 +38,10 @@ public class UserController {
     public void getVerifyCode(HttpServletRequest request, HttpServletResponse response){
         userService.getVerifyCode(request,response);
     }
+
+    @GetMapping("/checkToken")
+    public Result checkToken(@RequestParam("token")String token){
+        return userService.checkToken(token);
+    }
+
 }

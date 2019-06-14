@@ -26,6 +26,7 @@ public class WebConfigAdapter implements WebMvcConfigurer {
         excludePatterns.add("/pages/**");
         excludePatterns.add("/public/**");
         excludePatterns.add("/resource/**");
+        excludePatterns.add("/druid/**");
         registry.addInterceptor(tokenIntercept).addPathPatterns("/**").excludePathPatterns(excludePatterns);
     }
 }

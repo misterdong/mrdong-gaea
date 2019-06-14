@@ -14,7 +14,7 @@ public interface IUserService {
      * @param name
      * @return
      */
-    Result login(String name);
+    Result login(String phone);
 
     /**
      * 获取验证码
@@ -23,5 +23,5 @@ public interface IUserService {
      */
     void getVerifyCode(HttpServletRequest request, HttpServletResponse response);
 
-    CheckAuthResponse checkAuth(CheckAuthRequest request);
+    Result checkToken(String token);
 }
