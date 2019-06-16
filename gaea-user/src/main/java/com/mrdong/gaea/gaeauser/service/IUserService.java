@@ -16,12 +16,7 @@ public interface IUserService {
      */
     Result login(String phone);
 
-    /**
-     * 获取验证码
-     * @param request
-     * @param response
-     */
-    void getVerifyCode(HttpServletRequest request, HttpServletResponse response);
+
 
     Result checkToken(String token);
 }

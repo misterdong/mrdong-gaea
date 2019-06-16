@@ -6,10 +6,12 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.web.client.RestTemplate;
 
 @EnableEurekaClient
 @SpringBootApplication
+@ImportResource(locations = {"classpath:kaptcha.xml"})
 public class GaeaSsoApplication {
 
     public static void main(String[] args) {

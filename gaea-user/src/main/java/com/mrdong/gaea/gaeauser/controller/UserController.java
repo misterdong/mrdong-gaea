@@ -34,10 +34,7 @@ public class UserController {
         return null;
     }
 
-    @GetMapping(value = "/getVerifyCode")
-    public void getVerifyCode(HttpServletRequest request, HttpServletResponse response){
-        userService.getVerifyCode(request,response);
-    }
+
 
     @GetMapping("/checkToken")
     public Result checkToken(@RequestParam("token")String token){
