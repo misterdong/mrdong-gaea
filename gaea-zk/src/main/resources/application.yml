@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: gaea-zk
+server:
+  port: 8082
