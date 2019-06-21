@@ -52,7 +52,7 @@ public class UserServiceImpl implements IUserService {
         Map<String, Object> map = new HashMap<>();
 
         map.put("uid", user.getUid());
-        map.put("exp", DateTime.now().plusSeconds(40).toDate().getTime() / 1000);
+        map.put("exp", DateTime.now().plusHours(6).toDate().getTime() / 1000);
         String token = JwtTokenUtils.generatorToken(map);
 
         return Result.success(token);
