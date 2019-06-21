@@ -34,16 +34,14 @@ public class TokenIntercept extends HandlerInterceptorAdapter {
 
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Object bean = handlerMethod.getBean();
-        if (!( bean instanceof BaseController)){
-            throw new RuntimeException("must extend BaseController");
-        }
+
         if (isAnonymous(handlerMethod)){
             return true;
         }
         String token = CookieUtils.getCookie(request, ACCESS_TOKEN);
         if (StringUtils.isEmpty(token)){
-            response.getWriter().write("{'code':'403','msg':'no login'}");
-            return true;
+            response.getWriter().write("{\"code\":\"403\",\"msg\":\"no login\"}");
+            return false;
         }
 
         //TODO 校验token有效性

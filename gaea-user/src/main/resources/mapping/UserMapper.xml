@@ -10,4 +10,11 @@
         SELECT `uid`,`name`,`phone`,`password` FROM gaea_user WHERE `phone`=#{phone}
     </select>
 
+    <insert id="addUser" parameterType="com.mrdong.gaea.gaeauser.model.User">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO `gaea_user` (`name`,`phone`,`password`) values (#{user.name},#{user.phone},#{user.password})
+    </insert>
 </mapper>

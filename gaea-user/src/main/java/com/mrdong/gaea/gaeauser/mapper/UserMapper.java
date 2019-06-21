@@ -14,4 +14,6 @@ public interface UserMapper {
     String getPassword(@Param("userName") String userName);
 
     User getUserInfo(@Param("phone")String phone);
+
+    int addUser(@Param("user")User user);
 }

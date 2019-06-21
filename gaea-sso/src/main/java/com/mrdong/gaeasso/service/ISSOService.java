@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public interface ISSOService {
 
-   String login(String phone, String password, HttpServletResponse response);
+    Result login(String phone, String password, String verifyCode ,HttpServletRequest request,HttpServletResponse response);
 
     String checkToken(String token,HttpServletResponse response) throws IOException;
 

@@ -15,8 +15,13 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -24,8 +29,10 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
 
+    private static final String SHA_CODE = "misterdong-gaea";
+
     @Override
-    public Result login(String phone) {
+    public Result login(String phone,String password) {
         Result result = new Result();
         Trace trace = Trace.getInstance();
         User user = userMapper.getUserInfo(phone);
@@ -35,6 +42,13 @@ public class UserServiceImpl implements IUserService {
             result.setMsg("no user");
             return result;
         }
+        String pass = encryptPassword(password);
+        if (!Objects.equals(pass,user.getPassword())){
+            result.setCode("400");
+            result.setMsg("password error");
+            return result;
+        }
+
         Map<String, Object> map = new HashMap<>();
 
         map.put("uid", user.getUid());
@@ -71,9 +85,33 @@ public class UserServiceImpl implements IUserService {
         return result;
     }
 
+    @Override
+    public Result register(User user) {
+
+        user.setPassword(encryptPassword(user.getPassword()));
+
+        int uid = userMapper.addUser(user);
+
+        return Result.success(uid);
+    }
+
     private void beforeValidateAuth(String token) {
         if (StringUtils.isEmpty(token)) {
             throw new GaeaUserForbiddenException();
         }
+    }
+
+    private String encryptPassword(String password){
+        BigInteger sha = null;
+        byte[] bytes = password.getBytes();
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+            messageDigest.update(bytes);
+            sha= new BigInteger(messageDigest.digest());
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return sha.toString(32);
     }
 }

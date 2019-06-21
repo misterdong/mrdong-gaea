@@ -8,7 +8,6 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.web.bind.annotation.RestController;
 
-@EnableEurekaClient
 @RestController
 @EnableDiscoveryClient
 @SpringBootApplication

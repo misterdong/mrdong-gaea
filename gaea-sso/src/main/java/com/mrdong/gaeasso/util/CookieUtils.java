@@ -2,6 +2,7 @@ package com.mrdong.gaeasso.util;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @description:
@@ -24,5 +25,18 @@ public class CookieUtils {
             }
         }
         return null;
+    }
+
+    /**
+     * 设置cookie
+     * @param response
+     * @param name
+     * @param value
+     * @param expire
+     */
+    public static void setCookie(HttpServletResponse response,String name,String value,int expire){
+        Cookie cookie = new Cookie(name,value);
+        cookie.setMaxAge(expire);
+        response.addCookie(cookie);
     }
 }

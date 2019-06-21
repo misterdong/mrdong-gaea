@@ -2,6 +2,8 @@ package com.mrdong.gaeasso.controller;
 
 import com.mrdong.gaeasso.annotation.Anonymous;
 import com.mrdong.gaeasso.service.ISSOService;
+import com.mrdong.gaeasso.util.Result;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +18,22 @@ public class SSOController extends BaseController{
     @Autowired
     private ISSOService issoService;
 
-    @GetMapping("/ssologin")
+    @PostMapping("/ssologin")
     @Anonymous
-    public String ssoLogin(@RequestParam("phone")String phone, @RequestParam("password")String password, HttpServletResponse response){
-        return issoService.login(phone,password,response);
+    public Result ssoLogin(String phone,String password,String verifyCode,
+                           HttpServletRequest request , HttpServletResponse response){
+
+        if (StringUtils.isEmpty(phone)){
+            return Result.fail("400","手机号不能为空");
+        }
+        if (StringUtils.isEmpty(password)){
+            return Result.fail("400","密码不能为空");
+        }
+        if (StringUtils.isEmpty(verifyCode)){
+            return Result.fail("400","验证码不能为空");
+        }
+
+        return issoService.login(phone,password, verifyCode,request,response);
     }
 
     @GetMapping("/test")
