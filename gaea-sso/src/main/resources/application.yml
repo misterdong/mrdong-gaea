@@ -8,7 +8,8 @@ spring:
   application:
     name: gaea-sso
   redis:
-    host: 127.0.0.1
+    host: 39.97.187.198
     port: 6379
+    password: misterdong
 ribbon:
   ReadTimeout: 10000
