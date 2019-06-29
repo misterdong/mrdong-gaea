@@ -104,7 +104,7 @@ public class SSOServiceImpl implements ISSOService {
         BufferedImage image = producer.createImage(text);
         String uuid = UUIDUtils.getUUID();
         CookieUtils.setCookie(response,"verify_code",uuid,60);
-        //保存到shiro session
+        //保存 code 到redis
         redisTemplate.opsForValue().set("user:verifyCode:"+uuid,text,60, TimeUnit.SECONDS);
         try {
             ServletOutputStream out = response.getOutputStream();
